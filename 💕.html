@@ -1,0 +1,120 @@
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>I ❤️ U - SK Animation</title>
+  <style>
+    body {
+      background-color: #d7b8ff; /* Light purple background */
+      height: 100vh;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      font-family: sans-serif;
+    }
+
+    .container {
+      display: flex;
+      align-items: center;
+      gap: 80px; /* Added more gap between I, heart, and U */
+    }
+
+    .text {
+      font-size: 80px;
+      font-weight: bold;
+      color: #4a148c;
+      user-select: none;
+    }
+
+    #heart {
+      position: relative;
+      width: 170px;
+      height: 170px;
+      background-color: #b30000; /* Bloody red */
+      transform: rotate(-45deg);
+      animation: pulse 1.3s infinite ease-in-out;
+      box-shadow: 0 0 50px rgba(255, 0, 0, 0.7);
+    }
+
+    /* Heart shape using pseudo-elements */
+    #heart::before,
+    #heart::after {
+      content: "";
+      position: absolute;
+      width: 170px;
+      height: 170px;
+      background-color: #b30000;
+      border-radius: 50%;
+    }
+
+    #heart::before {
+      top: -85px;
+      left: 0;
+    }
+
+    #heart::after {
+      left: 85px;
+      top: 0;
+    }
+
+    @keyframes pulse {
+      0% { transform: rotate(-45deg) scale(1); }
+      50% { transform: rotate(-45deg) scale(1.2); }
+      100% { transform: rotate(-45deg) scale(1); }
+    }
+
+    #sk {
+      position: absolute;
+      top: 30%;
+      left: 30%;
+      right: 20%;
+      transform: translate(-50%, -50%) rotate(45deg);
+      font-size: 60px; /* Bigger so both letters are clear */
+      font-weight: bold;
+      letter-spacing: 2px; /* Adds spacing between S and K */
+      color: white;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+      white-space: nowrap; /* Prevents line break between S and K */
+    }
+
+    .reveal #sk {
+      opacity: 1;
+    }
+
+    .expand {
+      animation: openHeart 1s forwards ease-out;
+    }
+
+    @keyframes openHeart {
+      0% { transform: rotate(-45deg) scale(1.2); }
+      100% { transform: rotate(-45deg) scale(4); opacity: 0.6; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="text">I</div>
+    <div id="heart">
+      <div id="sk">SK</div>
+    </div>
+    <div class="text">U</div>
+  </div>
+
+  <script>
+    const heart = document.getElementById('heart');
+    const sk = document.getElementById('sk');
+
+    // After a few pulses, make the heart open and reveal SK
+    setTimeout(() => {
+      heart.classList.add('expand');
+      setTimeout(() => {
+        heart.classList.add('reveal');
+        sk.style.opacity = 1;
+      }, 900); // reveal SK after expansion
+    }, 4000); // pulse for 4 seconds first
+  </script>
+</body>
+</html>
